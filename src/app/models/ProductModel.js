@@ -6,7 +6,7 @@ const Product = new Schema({
     name: { type: String, default: 'Chưa có sản phẩm' },
     oldPrice: { type: Number, default: 0 },
     currentPrice: { type: Number, min: 0 },
-    createdAt: { type: Date, default: Date.now },
+    imageUrl: { type: String, default: 'Loading'},
 });
 
 module.exports = mongoose.model('Product', Product);
