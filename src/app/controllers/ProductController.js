@@ -16,6 +16,14 @@ class ProductController {
         res.render('products/create', {});
     }
 
+    // [GET] /products/:id/edit
+    edit(req, res, next) {
+        ProductModel.findById(req.params.id)
+            .then(product => {
+                res.render('products/edit', { product: mongooseToObject(product) });
+            })
+    }
+
     // [POST] /products/store
     store(req, res, next) {
         ProductModel.create(req.body)
