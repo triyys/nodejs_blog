@@ -24,11 +24,18 @@ class ProductController {
             })
     }
 
+    // [PUT] /products/:id
+    update(req, res, next) {
+        ProductModel.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/me/stored/products'))
+            .catch(next);
+    }
+
     // [POST] /products/store
     store(req, res, next) {
         ProductModel.create(req.body)
             .then(() => res.redirect('/'))
-            .catch(error => {})
+            .catch(next);
     }
 }
 
