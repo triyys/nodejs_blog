@@ -1,0 +1,18 @@
+<div class="mt-4">
+    <h3>Đăng sản phẩm</h3>
+    <form method="POST" action="/products/store">
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="old-price" class="form-label">Giá gốc</label>
+            <input type="text" class="form-control" id="old-price" name="oldPrice">
+        </div>
+        <div class="mb-3">
+            <label for="current-price" class="form-label">Giá hiện tại</label>
+            <input type="text" class="form-control" id="current-price" name="currentPrice">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>

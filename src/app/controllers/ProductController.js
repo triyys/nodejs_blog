@@ -10,6 +10,18 @@ class ProductController {
             })
             .catch(next);
     }
+
+    // [GET] /products/create
+    create(req, res, next) {
+        res.render('products/create', {});
+    }
+
+    // [POST] /products/store
+    store(req, res, next) {
+        ProductModel.create(req.body)
+            .then(() => res.redirect('/'))
+            .catch(error => {})
+    }
 }
 
 module.exports = new ProductController;
