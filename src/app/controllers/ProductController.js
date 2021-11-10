@@ -31,6 +31,13 @@ class ProductController {
             .catch(next);
     }
 
+    // [DELETE] /products/:id
+    delete(req, res, next) {
+        ProductModel.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
     // [POST] /products/store
     store(req, res, next) {
         ProductModel.create(req.body)
