@@ -12,6 +12,17 @@ class MeController {
             })
             .catch(next);
     }
+    
+    // [GET] /me/stored/products
+    trashProducts(req, res, next) {
+        ProductModel.findDeleted({})
+            .then(products => {
+                return res.render('me/trash-products', {
+                    products: multipleMongooseToObject(products),
+                });
+            })
+            .catch(next);
+    }
 }
 
 module.exports = new MeController;

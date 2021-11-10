@@ -1,7 +1,7 @@
 <div class="mt-4">
     <div>
-        <h3>Sản phẩm của tôi</h3>
-        <a href="/me/trash/products">Thùng rác</a>
+        <a href="/me/stored/products">Danh sách sản phẩm</a>
+        <h3>Thùng rác</h3>
     </div>
 
     <table class="table mt-4">
@@ -22,16 +22,16 @@
                 <td>{{this.oldPrice}}</td>
                 <td>{{this.currentPrice}}</td>
                 <td>
-                    <a href="/products/{{this._id}}/edit" class="btn btn-secondary">Sửa</a>
+                    <a href="" class="btn btn-secondary btn-restore" data-bs-id="{{this._id}}">Khôi phục</a>
                     <a href="#" class="btn btn-danger" data-bs-id="{{this._id}}" data-bs-toggle="modal"
-                        data-bs-target="#delete-product-modal">Xóa</a>
+                        data-bs-target="#delete-product-modal">Xóa vĩnh viễn</a>
                 </td>
             </tr>
             {{else}}
             <tr>
                 <td colspan="4" class="text-center">
-                    Bạn chưa đăng sản phẩm nào.
-                    <a href="/products/create">Đăng sản phẩm</a>
+                    Trống.
+                    <a href="/me/stored/products">Danh sách sản phẩm</a>
                 </td>
             </tr>
             {{/each}}
@@ -58,13 +58,15 @@
     </div>
 </div>
 
-{{!-- Delete hidden form --}}
 <form name="delete-product-form" method="POST"></form>
+<form name="restore-product-form" method="POST"></form>
 
 <script>
     var deleteProductModal = document.getElementById('delete-product-modal')
     var productId
     var deleteForm = document.forms['delete-product-form']
+    var restoreForm = document.forms['restore-product-form']
+    var restoreBtnAll = document.querySelectorAll('.btn-restore')
 
     // When dialog confirm clicked
     deleteProductModal.addEventListener('show.bs.modal', function (event) {
@@ -81,4 +83,15 @@
         deleteForm.action = `/products/${productId}?_method=DELETE`
         deleteForm.submit()
     }
+
+    // Restore button clicked
+    restoreBtnAll.forEach(restoreBtn => {
+        restoreBtn.addEventListener('click', e => {
+            e.preventDefault()
+            var productId = restoreBtn.getAttribute('data-bs-id')
+
+            restoreForm.action = `/products/${productId}/restore?_method=PATCH`
+            restoreForm.submit()
+        })
+    })
 </script>

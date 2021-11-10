@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
-
-mongoose.plugin(slug);
+const mongooseDelete = require('mongoose-delete');
 
 const Schema = mongoose.Schema;
 
@@ -14,6 +13,13 @@ const Product = new Schema({
 }, {
     // supported by mongoose from version 4.
     timestamps: true,
+});
+
+// Add plugins
+mongoose.plugin(slug);
+Product.plugin(mongooseDelete, {
+    deletedAt: true,
+    overrideMethods: 'all',
 });
 
 module.exports = mongoose.model('Product', Product);

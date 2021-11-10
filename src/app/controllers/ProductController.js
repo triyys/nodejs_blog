@@ -31,9 +31,16 @@ class ProductController {
             .catch(next);
     }
 
+    // [PATCH] /products/:id/restore
+    restore(req, res, next) {
+        ProductModel.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
     // [DELETE] /products/:id
     delete(req, res, next) {
-        ProductModel.deleteOne({ _id: req.params.id })
+        ProductModel.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }
