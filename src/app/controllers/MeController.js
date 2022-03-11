@@ -9,7 +9,7 @@ class MeController {
                 return res.render('me/stored-products', {
                     deletedCount,
                     products: multipleMongooseToObject(products),
-                })
+                });
             })
             .catch(next);
     }
